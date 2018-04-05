@@ -13,5 +13,14 @@
       <input type="file" name="filename"/>
       <input name="MySend" type="submit" label="Отправить" />
     </form>
+    <br />
+    <br />
+    <br />
+    <h1>Последние отправленные СМС</h1>
+    <?php
+        include "db/Database.php";
+        include "db/Select.php";
+        $object = new Select("sms");
+    ?>
   </body>
 </html>
