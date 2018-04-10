@@ -1,3 +1,12 @@
+<html>
+<?php header('Content-type: text/html; charset=utf-8'); ?>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+</head>
+<body>
 <?php
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
@@ -7,7 +16,7 @@
   print($stroka);
   print("<br/>");
   $uploaddir = '/var/www/smsprofi/';
-  $uploadfile = $uploaddir . basename($_FILES['filename']['name']);
+  $uploadfile = $uploaddir . basename($_FILES['filename']['name']) . date("d.m.Y - H:i:s");
   echo '<br>' . $uploadfile. '<br>';
   echo '<pre>';
   if (move_uploaded_file($_FILES['filename']['tmp_name'], $uploadfile)) {
@@ -19,32 +28,6 @@
   print_r($_FILES);
   print "</pre>";
   
-      include "db/Database.php";
-      $object = new Database();
-      $object->connectToDb();
-        $query = "SELECT ID, FIO, TEL, TEXT, STATUS, DATA
-            FROM $this->tabname ORDER BY Data desc limit 13";
-            mysqli_query($this->link, "SET NAMES utf8");          
-  
-      $rows = mysqli_num_rows($data);
-      $nom = 1;
-      while ($row = mysqli_fetch_array($data)) {
-        echo '<tr>';
-        echo '<td>' . $nom . '</td>';
-        echo '<td>' . $row['ID'] . '</td>';
-        echo '<td>' . $row['FIO'] . '</td>';
-        echo '<td>' . $row['TEL'] . '</td>';
-        echo '<td>' . $row['TEXT'] . '</td>';
-        echo '<td>' . $row['STATUS'] . '</td>';
-        $dateX = strtotime($row['DATA']);
-        echo '<td>' . date("d-m-Y", $dateX) . '</td>';
-        echo '</tr>';
-        $nom = $nom + 1;
-        if ($nom >= 13) {break;};
-      }
-      $object->closeConnection(); 
-
-  
   if (file_exists($uploadfile)) {
     $xml = simplexml_load_file($uploadfile);
     print_r($xml);
@@ -53,12 +36,26 @@
   }
   echo '<br>';
   $txt = $xml->text;
+  $conTxt = mb_convert_encoding($txt, 'utf-8', mb_detect_encoding($txt));
   $phon = $xml->phone;
-  print_r (curl_version());
+  
+      include "db/Database.php";
+      $object = new Database();
+      $object->connectToDb();
+      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('Гоферберг Игорь Андреевич', '" . $phon . "', '" . $conTxt . "', 'Передано в БД', '01.01.2018')";
+      echo '<br>';
+      echo $query;
+      echo '<br>';
+      print_r($object->GoQuery($query));      
+
+      $object->closeConnection(); 
+
   if (isset($_POST['MySend'])) 
   {
     $params = array("text" => $txt, "source" => "УТСЗН",);
     $phones = array($phon);
-    $send = $api->send($params, $phones);
+    //$send = $api->send($params, $phones);
   }
 ?>
+</body>
+</html>

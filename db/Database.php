@@ -29,5 +29,12 @@
             }
             return $sql;
         }
+        
+        function GoQuery($query1){
+            mysqli_query($this->link, "SET NAMES utf8");
+            if ($sql = mysqli_query($this->link, $query1)){
+            }
+            return $sql;
+        }
     }
 ?> 

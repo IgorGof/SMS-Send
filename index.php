@@ -1,7 +1,10 @@
-<html>
-  <head>
-  </head>
-  <body>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+</head>
+<body>
     <?php
       error_reporting(E_ALL);
       ini_set('display_errors', 1);
@@ -46,5 +49,5 @@
       $object->closeConnection(); 
     ?>
     </table>
-  </body>
+</body>
 </html>
