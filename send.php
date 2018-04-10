@@ -16,7 +16,8 @@
   print($stroka);
   print("<br/>");
   $uploaddir = '/var/www/smsprofi/';
-  $uploadfile = $uploaddir . basename($_FILES['filename']['name']) . date("d.m.Y - H:i:s");
+  $uploadfile = $uploaddir . basename($_FILES['filename']['name']);
+  // . date("d.m.Y - H:i:s");
   echo '<br>' . $uploadfile. '<br>';
   echo '<pre>';
   if (move_uploaded_file($_FILES['filename']['tmp_name'], $uploadfile)) {
@@ -54,7 +55,7 @@
       echo '<br>';
       echo $query;
       echo '<br>';
-      //print_r($object->GoQuery($query));      
+      print_r($object->GoQuery($query));      
 
       $object->closeConnection(); 
 
@@ -64,6 +65,7 @@
     $phones = array($phon);
     //$send = $api->send($params, $phones);
   }
+  header("Location: index.php");
 ?>
 </body>
 </html>
