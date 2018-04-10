@@ -36,11 +36,12 @@
     exit('Не удалось открыть файл test.xml.');
   }
   echo '<br>';
-  //print_r($xml->data->tableBand->tableRow->tableCell);
+  $toxml =(array)$xml->metaInfo->exported;
+  //print_r($toxml);
   echo '<br>';
-  //var_dump($xml->data->tableBand->tableRow->tableCell);
+  //var_dump($toxml);
   echo '<br>';
-  //echo $xml->data->tableBand->tableRow->tableCell[0];
+  echo $toxml ["@attributes"]["user"];
     
     
   echo $xml->productName;
@@ -51,7 +52,7 @@
       include "db/Database.php";
       $object = new Database();
       $object->connectToDb();
-      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('Гоферберг Игорь Андреевич', '" . $phon . "', '" . $txt . "', 'Передано в БД', '01.01.2018')";
+      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('".$toxml["@attributes"]["user"]."', '" . $phon . "', '" . $txt . "', 'Передано в БД', '".$toxml["@attributes"]["dateTime"]."')";
       echo '<br>';
       echo $query;
       echo '<br>';
@@ -65,7 +66,7 @@
     $phones = array($phon);
     //$send = $api->send($params, $phones);
   }
-  header("Location: index.php");
+  //header("Location: index.php");
 ?>
 </body>
 </html>
