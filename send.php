@@ -35,18 +35,26 @@
     exit('Не удалось открыть файл test.xml.');
   }
   echo '<br>';
-  $txt = $xml->text;
-  $conTxt = mb_convert_encoding($txt, 'utf-8', mb_detect_encoding($txt));
-  $phon = $xml->phone;
-  
+  //print_r($xml->data->tableBand->tableRow->tableCell);
+  echo '<br>';
+  //var_dump($xml->data->tableBand->tableRow->tableCell);
+  echo '<br>';
+  //echo $xml->data->tableBand->tableRow->tableCell[0];
+    
+    
+  echo $xml->productName;
+  $txt = $xml->data->tableBand->tableRow->tableCell[1];
+  echo '<br>';
+  echo $phon = $xml->data->tableBand->tableRow->tableCell[0];
+  echo '<br>';
       include "db/Database.php";
       $object = new Database();
       $object->connectToDb();
-      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('Гоферберг Игорь Андреевич', '" . $phon . "', '" . $conTxt . "', 'Передано в БД', '01.01.2018')";
+      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('Гоферберг Игорь Андреевич', '" . $phon . "', '" . $txt . "', 'Передано в БД', '01.01.2018')";
       echo '<br>';
       echo $query;
       echo '<br>';
-      print_r($object->GoQuery($query));      
+      //print_r($object->GoQuery($query));      
 
       $object->closeConnection(); 
 
