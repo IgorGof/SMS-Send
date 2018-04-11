@@ -52,7 +52,7 @@
       include "db/Database.php";
       $object = new Database();
       $object->connectToDb();
-      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('".$toxml["@attributes"]["user"]."', '" . $phon . "', '" . $txt . "', 'Передано в БД', '".$toxml["@attributes"]["dateTime"]."')";
+      $query = "INSERT INTO sms (FIO, TEL, TEXT, STATUS, DATA) "."VALUE ('".$toxml["@attributes"]["user"]."', '" . $phon . "', '" . $txt . "', 'Передано в БД', '".date("Y-m-d H:i:s")."')";
       echo '<br>';
       echo $query;
       echo '<br>';

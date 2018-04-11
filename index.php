@@ -41,7 +41,7 @@
         echo '<td>' . $row['TEXT'] . '</td>';
         echo '<td>' . $row['STATUS'] . '</td>';
         $dateX = strtotime($row['DATA']);
-        echo '<td>' . date("d-m-Y", $dateX) . '</td>';
+        echo '<td>' . date("d-m-Y H:i:s", $dateX) . '</td>';
         echo '</tr>';
         $nom = $nom + 1;
         if ($nom >= 13) {break;};
