@@ -21,11 +21,18 @@
       <input name="MySend" type="submit" value="Отправить" />
     </form>
     </div>
-    <br />
-    <br />
-    <br />
-    <h1>Последние отправленные СМС</h1>
-    <table>
+    <div class="table">
+    <table class="table_blur">
+    <caption>Последние отправленные СМС</caption>
+    <tr>
+    <th>№</th>
+    <th>ID</th>
+    <th>Логин отправителя</th></th>
+    <th>Телефон получателя</th>
+    <th>Текст СМС</th>
+    <th>Статус</th>
+    <th>Дата и время отправки</th>
+    </tr>
     <?php
       include "db/Database.php";
       //include "db/Select.php";
@@ -52,5 +59,6 @@
       $object->closeConnection(); 
     ?>
     </table>
+    </div>
 </body>
 </html>
