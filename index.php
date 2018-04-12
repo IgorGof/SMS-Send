@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <title></title>
+  <title>Отправка СМС</title>
+  <link rel="stylesheet" media="screen" href="style.css">
 </head>
 <body>
     <?php
@@ -12,17 +13,19 @@
       $api = new Transport();
 
     ?>
+    <div class="Send">
     <h1>Отправка СМС</h1>
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
     <form action="send.php" method="POST" enctype="multipart/form-data">
       <input type="file" name="filename"/>
-      <input name="MySend" type="submit" label="Отправить" />
+      <input name="MySend" type="submit" value="Отправить" />
     </form>
+    </div>
     <br />
     <br />
     <br />
     <h1>Последние отправленные СМС</h1>
-    <table border="1">
+    <table>
     <?php
       include "db/Database.php";
       //include "db/Select.php";
