@@ -46,9 +46,12 @@
     
   echo $xml->productName;
   $txt = $xml->data->tableBand->tableRow->tableCell[1];
+  echo $txt;
+  $txt = str_replace('&quot;', '', $txt);
   echo '<br>';
   echo $phon = $xml->data->tableBand->tableRow->tableCell[0];
   echo '<br>';
+  echo $txt;
       include "db/Database.php";
       $object = new Database();
       $object->connectToDb();
@@ -64,9 +67,9 @@
   {
     $params = array("text" => $txt, "source" => "УТСЗН",);
     $phones = array($phon);
-    //$send = $api->send($params, $phones);
+    $send = $api->send($params, $phones);
   }
-  //header("Location: index.php");
+  header("Location: index.php");
 ?>
 </body>
 </html>
